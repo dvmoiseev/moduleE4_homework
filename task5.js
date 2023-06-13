@@ -1,22 +1,30 @@
-function Device(name, power)
+class Device
 {
-	this.name = name;
-	this.power = power;
-	this.plugged = false
+	constructor(name, power)
+	{
+		this.name = name;
+		this.power = power;
+		this.plugged = false
+	}
+	
+	OnOff()
+	{
+		this.plugged = ! (this.plugged);
+		if (this.plugged) { console.log(this.name + ' вкл.') }
+		if (! this.plugged) { console.log(this.name + ' выкл.') }
+	}
+	
+	getPower()
+	{
+		if (this.plugged) return(this.power); else return(0);
+	}
 }
-
-Device.prototype.OnOff = function()
-{
-	this.plugged = ! (this.plugged);
-	if (this.plugged) { console.log(this.name + ' вкл.') }
-	if (! this.plugged) { console.log(this.name + ' выкл.') }
-};
 
 let totalPower = function()
 {
 	let sum = 0;
 	for (let value of Devices)
-		if (value.plugged) sum = sum + value.power;
+		sum = sum + value.getPower();
 	return sum;
 }
 
